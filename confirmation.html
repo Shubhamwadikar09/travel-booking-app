@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; }
+        .details { margin-bottom: 20px; }
+        img { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking Confirmation</h1>
+        <div id="confirmationDetails" class="details"></div>
+        <h2>Vehicle Details</h2>
+        <img id="vehicleImage" src="" alt="Vehicle Image">
+        <p id="driverDetails"></p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const email = urlParams.get('email');
+        const from = urlParams.get('from');
+        const to = urlParams.get('to');
+        const vehicle = urlParams.get('vehicle');
+        const days = urlParams.get('days');
+        const charges = days * 1000;
+
+        const confirmationMessage = `
+            Name: ${name}<br>
+            Email: ${email}<br>
+            From: ${from}<br>
+            To: ${to}<br>
+            Vehicle: ${vehicle}<br>
+            Days: ${days}<br>
+            Charges: ₹${charges}
+        `;
+
+        document.getElementById('confirmationDetails').innerHTML = confirmationMessage;
+
+        const vehicleImages = {
+            car: 'images/car.jpg',
+            suv: 'images/suv.jpg',
+            van: 'images/van.jpg'
+        };
+
+        const driverDetails = {
+            car: 'Driver: Rajesh Kumar<br>Contact: 9876543210',
+            suv: 'Driver: Arjun Singh<br>Contact: 9876543211',
+            van: 'Driver: Ravi Patel<br>Contact: 9876543212'
+        };
+
+        document.getElementById('vehicleImage').src = vehicleImages[vehicle];
+        document.getElementById('driverDetails').innerHTML = driverDetails[vehicle];
+    </script>
+</body>
+</html>
